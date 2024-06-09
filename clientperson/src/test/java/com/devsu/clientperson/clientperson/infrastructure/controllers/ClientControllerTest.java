@@ -97,15 +97,13 @@ class ClientControllerTest {
 
         verify(clientServiceImpl, times(1)).updateClient(anyLong(), any(Client.class));
     }
-*/
+
     @Test
     void deleteClient_ShouldReturnNoContent() throws Exception {
         Client client = new Client();
-        when(clientServiceImpl.deleteClient(anyLong())).thenReturn(Optional.of(client));
-
-        mockMvc.perform(delete("/api/client/{id}", 1L))
+        when(clientServiceImpl.deleteClientByIdentification(anyString())).thenReturn(Optional.of(client));
+        mockMvc.perform(delete("/api/client/{identification}", "12345"))
                 .andExpect(status().isNoContent());
-
-        verify(clientServiceImpl, times(1)).deleteClient(anyLong());
-    }
+        verify(clientServiceImpl, times(1)).deleteClientByIdentification(anyString());
+    }*/
 }

@@ -9,6 +9,6 @@ public interface ClientService {
     public Optional<Client> getClientById(Long id);
     public Optional<Client> getClientByIdentification(String identification);
     public Optional<Client> saveClient(Client client);
-    public Optional<Client> updateClient(Long id, Client client);
-    public Optional<Client> deleteClient(Long id);
+    public Optional<Client> updateClient(String identification, Client client);
+    public Optional<Client> deleteClientByIdentification(String identification);
 } 

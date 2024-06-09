@@ -47,17 +47,19 @@ public class MovementServiceImpl implements MovementService{
         if(account.isEmpty()){
             throw new BussinessException("The accountNumber: "+movement.getAccountNumber()+" does not exist in the Database.");
         }
-        Long initialBalance = account.get().getInitialBalance();
-        Long finalBalance = initialBalance + movement.getMovementDetail();
+        Long accountBalance = account.get().getAccountBalance();
+        Long finalBalance = accountBalance + movement.getMovementDetail();
+        if(finalBalance<0){
+            throw new BussinessException("The accountNumber: "+movement.getAccountNumber()+" dont have enough balance to make the movement.");
+        }
         Account accountUpdate = new Account();
         accountUpdate.setAccountNumber(account.get().getAccountNumber());
         accountUpdate.setAccountType(account.get().getAccountType());
-        accountUpdate.setInitialBalance(finalBalance);
+        accountUpdate.setAccountBalance(finalBalance);
         accountUpdate.setStatus(account.get().isStatus());
         accountUpdate.setClient(account.get().getClient());        
         accountService.updateAccount(account.get().getAccountNumber(), accountUpdate);
-
-        movement.setInitialBalance(initialBalance);
+        movement.setInitialBalance(accountBalance);
         movement.setFinalBalance(finalBalance);
         movement.setAccountType(account.get().getAccountType());        
         Optional<Movement> movementSave = Optional.of(movementRepository.save(MovementMapperEntity.toMovementEntity(movement))).map(movementSaved->MovementMapperEntity.toMovement(movementSaved));        
@@ -80,12 +82,15 @@ public class MovementServiceImpl implements MovementService{
         if(!movement.getAccountNumber().equals(movementSearch.get().getAccountNumber())){
             throw new BussinessException("The accountNumber: "+movement.getAccountNumber()+" is diferent to Movement width id"+id);
         }
-        Long initialBalance = account.get().getInitialBalance();
-        Long finalBalance = initialBalance + movement.getMovementDetail();
+        Long accountBalance = account.get().getAccountBalance();
+        Long finalBalance = accountBalance + movement.getMovementDetail();
+        if(finalBalance<0){
+            throw new BussinessException("The accountNumber: "+movement.getAccountNumber()+" dont have enough balance to make the movement.");
+        }
         Account accountUpdate = new Account();
         accountUpdate.setAccountNumber(account.get().getAccountNumber());
         accountUpdate.setAccountType(account.get().getAccountType());
-        accountUpdate.setInitialBalance(finalBalance);
+        accountUpdate.setAccountBalance(finalBalance);
         accountUpdate.setStatus(account.get().isStatus());
         accountUpdate.setClient(account.get().getClient());        
         accountService.updateAccount(account.get().getAccountNumber(), accountUpdate);
@@ -106,18 +111,18 @@ public class MovementServiceImpl implements MovementService{
             throw new ResourceNotFoundException("movement", "id", id);
         }
         Optional<Account> account = accountService.getAccountByAccountNumber(movementSearch.get().getAccountNumber());
-        Long initialBalance = account.get().getInitialBalance();
+        Long accountBalance = account.get().getAccountBalance();
         Long movement = movementSearch.get().getMovementDetail();
         Long finalBalance = 0L;
         if(movement<0){
-            finalBalance = initialBalance + movement;
+            finalBalance = accountBalance + movement;
         }else{
-            finalBalance = initialBalance - movement;
+            finalBalance = accountBalance - movement;
         }        
         Account accountUpdate = new Account();
         accountUpdate.setAccountNumber(account.get().getAccountNumber());
         accountUpdate.setAccountType(account.get().getAccountType());
-        accountUpdate.setInitialBalance(finalBalance);
+        accountUpdate.setAccountBalance(finalBalance);
         accountUpdate.setStatus(account.get().isStatus());
         accountUpdate.setClient(account.get().getClient());        
         accountService.updateAccount(account.get().getAccountNumber(), accountUpdate);

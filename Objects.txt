@@ -1,0 +1,94 @@
+{
+  "name": "Jose Lema",
+  "gender": "Masculino",
+  "age": 30,
+  "identification": "12345",
+  "address": "Otavalo sn y principal",
+  "phone": "098254785",
+  "clientId": "jose.lema",
+  "password": "1234",
+  "status": true
+}
+{
+  "name": "Marianela Montalvo",
+  "gender": "Femenino",
+  "age": 27,
+  "identification": "123456",
+  "address": "Amazonas y NNNU",
+  "phone": "097549856",
+  "clientId": "marianela.montalvo",
+  "password": "5678",
+  "status": true
+}
+{
+  "name": "Juan Osorio",
+  "gender": "Masculino",
+  "age": 32,
+  "identification": "1234567",
+  "address": "13 junio y Equinoccial ",
+  "phone": "098874587",
+  "clientId": "juan.osorio",
+  "password": "1245",
+  "status": true
+}
+-----------------------------------------------------------
+{
+  "accountNumber": "478758",
+  "accountType": "Ahorros",
+  "accountBalance": 2000,
+  "status": true,
+  "identification":"12345"
+}
+{
+  "accountNumber": "225487",
+  "accountType": "Ahorros",
+  "accountBalance": 100,
+  "status": true,
+  "identification":"123456"
+}
+{
+  "accountNumber": "495878",
+  "accountType": "Ahorros",
+  "accountBalance": 0,
+  "status": true,
+  "identification":"1234567"
+}
+{
+  "accountNumber": "496825",
+  "accountType": "Ahorros",
+  "accountBalance": 540,
+  "status": true,
+  "identification":"123456"
+}
+{
+  "accountNumber": "585545",
+  "accountType": "Corriente",
+  "accountBalance": 1000,
+  "status": true,
+  "identification":"12345"
+}
+-----------------------------------------------------------
+{
+  "accountNumber": "478758",
+  "movementDetail":-575,  
+  "dateMovement":"2022-02-11",
+  "status": true
+}
+{
+  "accountNumber": "225487",
+  "movementDetail":600,  
+  "dateMovement":"2022-02-10",
+  "status": true
+}
+{
+  "accountNumber": "495878",
+  "movementDetail":-150,  
+  "dateMovement":"2022-02-19",
+  "status": true
+}
+{
+  "accountNumber": "496825",
+  "movementDetail":-540,  
+  "dateMovement":"2022-02-08",
+  "status": true
+}

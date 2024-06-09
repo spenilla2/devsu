@@ -49,7 +49,7 @@ public class AccountController {
     }
     @PutMapping("/{accountNumber}")
     public ResponseEntity<AccountDTOResponse> updateAccount(@PathVariable String accountNumber,@Valid @RequestBody AccountDTO accountDTO){    
-        return ResponseEntity.status(HttpStatus.CREATED).body(AccountMapper.toAccountDTOResponse(accountServiceImpl.updateAccount(accountNumber, AccountMapper.toAccount(accountDTO)).get()));
+        return ResponseEntity.status(HttpStatus.OK).body(AccountMapper.toAccountDTOResponse(accountServiceImpl.updateAccount(accountNumber, AccountMapper.toAccount(accountDTO)).get()));
         
     }
     @DeleteMapping("/{accountNumber}")

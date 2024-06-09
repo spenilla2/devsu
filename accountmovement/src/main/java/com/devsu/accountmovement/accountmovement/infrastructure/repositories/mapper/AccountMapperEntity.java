@@ -11,7 +11,7 @@ public class AccountMapperEntity {
         account.setId(accountEntity.getId());
         account.setAccountNumber(accountEntity.getAccountNumber());
         account.setAccountType(accountEntity.getAccountType());
-        account.setInitialBalance(accountEntity.getInitialBalance());
+        account.setAccountBalance(accountEntity.getAccountBalance());
         account.setStatus(accountEntity.isStatus());
         account.setClient(Client.builder().idClient(accountEntity.getIdClient())
                                           .identification(accountEntity.getIdentification())
@@ -24,7 +24,7 @@ public class AccountMapperEntity {
         accountEntity.setId(account.getId());
         accountEntity.setAccountNumber(account.getAccountNumber());
         accountEntity.setAccountType(account.getAccountType());
-        accountEntity.setInitialBalance(account.getInitialBalance());
+        accountEntity.setAccountBalance(account.getAccountBalance());
         accountEntity.setStatus(account.isStatus());
         accountEntity.setIdClient(account.getClient().getIdClient());
         accountEntity.setIdentification(account.getClient().getIdentification());

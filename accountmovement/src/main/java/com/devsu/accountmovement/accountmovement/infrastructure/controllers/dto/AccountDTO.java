@@ -15,7 +15,7 @@ public class AccountDTO {
     @NotEmpty(message = "accountNumeber is Required!")
     private String accountNumber;
     private String accountType;
-    private Long initialBalance;
+    private Long accountBalance;
     private boolean status;
     @NotEmpty(message = "The identification of Client is Required!")
     private String identification;

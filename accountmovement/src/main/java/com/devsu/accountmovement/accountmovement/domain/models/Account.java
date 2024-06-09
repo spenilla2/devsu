@@ -10,7 +10,7 @@ public class Account {
     private Long id;
     private String accountNumber;
     private String accountType;
-    private Long initialBalance;
+    private Long accountBalance;
     private boolean status;
     private Client client;
     

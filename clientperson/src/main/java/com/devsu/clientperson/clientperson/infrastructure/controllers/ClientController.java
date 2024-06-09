@@ -9,7 +9,7 @@ import com.devsu.clientperson.clientperson.domain.services.impl.ClientServiceImp
 import com.devsu.clientperson.clientperson.domain.models.Client;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,14 +37,14 @@ public class ClientController {
 
     }
     
-    @PutMapping ("/{id}")
-    public ResponseEntity<Client> updateClient(@PathVariable Long id, @Valid @RequestBody ClientDTO clientDTO) {
-        return ResponseEntity.status(HttpStatus.OK).body(clientServiceImpl.updateClient(id, ClientDTOMapper.toClient(clientDTO)).get());
+    @PutMapping ("/{identification}")
+    public ResponseEntity<Client> updateClient(@PathVariable String identification, @Valid @RequestBody ClientDTO clientDTO) {
+        return ResponseEntity.status(HttpStatus.OK).body(clientServiceImpl.updateClient(identification, ClientDTOMapper.toClient(clientDTO)).get());
     }   
     
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Client> deleteClient(@PathVariable Long id) {        
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(clientServiceImpl.deleteClient(id).get());    
+    @DeleteMapping("/{identification}")
+    public ResponseEntity<Client> deleteClient(@PathVariable String identification) {        
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(clientServiceImpl.deleteClientByIdentification(identification).get());    
     } 
 
 }

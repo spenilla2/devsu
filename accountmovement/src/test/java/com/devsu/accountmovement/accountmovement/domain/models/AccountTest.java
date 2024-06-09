@@ -11,7 +11,7 @@ public class AccountTest {
         account.setId(1L);
         account.setAccountNumber("123456789");
         account.setAccountType("Savings");
-        account.setInitialBalance(1000L);
+        account.setAccountBalance(1000L);
         account.setStatus(true);
         Client client = new Client();
         client.setIdClient(1L);
@@ -24,7 +24,7 @@ public class AccountTest {
         assertEquals(1L, account.getId());
         assertEquals("123456789", account.getAccountNumber());
         assertEquals("Savings", account.getAccountType());
-        assertEquals(1000L, account.getInitialBalance());
+        assertEquals(1000L, account.getAccountBalance());
         assertTrue(account.isStatus());
         assertNotNull(account.getClient());
         assertEquals(1L, account.getClient().getIdClient());
@@ -42,8 +42,8 @@ public class AccountTest {
         account.setAccountType("Checking");
         assertEquals("Checking", account.getAccountType());
 
-        account.setInitialBalance(2000L);
-        assertEquals(2000L, account.getInitialBalance());
+        account.setAccountBalance(2000L);
+        assertEquals(2000L, account.getAccountBalance());
 
         account.setStatus(false);
         assertFalse(account.isStatus());

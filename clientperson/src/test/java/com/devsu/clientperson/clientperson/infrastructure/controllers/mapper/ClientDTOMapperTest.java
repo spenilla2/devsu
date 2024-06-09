@@ -2,7 +2,7 @@ package com.devsu.clientperson.clientperson.infrastructure.controllers.mapper;
 
 import com.devsu.clientperson.clientperson.domain.models.Client;
 import com.devsu.clientperson.clientperson.infrastructure.controllers.dto.ClientDTO;
-import com.devsu.clientperson.clientperson.infrastructure.controllers.mapper.ClientDTOMapper;
+
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

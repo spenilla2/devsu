@@ -10,7 +10,7 @@ public class AccountMapper {
         Account account = new Account();
         account.setAccountNumber(accountDTO.getAccountNumber());
         account.setAccountType(accountDTO.getAccountType());
-        account.setInitialBalance(accountDTO.getInitialBalance());
+        account.setAccountBalance(accountDTO.getAccountBalance());
         account.setStatus(accountDTO.isStatus());
         account.setClient(Client.builder().identification(accountDTO.getIdentification()).build());
         return account;        
@@ -20,7 +20,7 @@ public class AccountMapper {
         accountDTOResponse.setId(account.getId());
         accountDTOResponse.setAccountNumber(account.getAccountNumber());
         accountDTOResponse.setAccountType(account.getAccountType());
-        accountDTOResponse.setInitialBalance(account.getInitialBalance());
+        accountDTOResponse.setAccountBalance(account.getAccountBalance());
         accountDTOResponse.setStatus(account.isStatus());
         accountDTOResponse.setClientName(account.getClient().getName());
         return accountDTOResponse;        

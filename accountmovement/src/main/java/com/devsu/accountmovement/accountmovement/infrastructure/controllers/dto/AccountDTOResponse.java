@@ -7,7 +7,7 @@ public class AccountDTOResponse {
     private Long id;
     private String accountNumber;
     private String accountType;
-    private Long initialBalance;
+    private Long accountBalance;
     private boolean status;
     private String clientName;    
 }

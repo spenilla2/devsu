@@ -41,7 +41,8 @@ public class ClientServiceImpl implements ClientService {
         return clientSearch;
     }
     public Optional<Client> saveClient(Client client) {
-        if(clientRepository.findByIdentification(client.getIdentification()).isPresent()){
+        Optional<Client> clientSearch = clientRepository.findByIdentification(client.getIdentification()).map(clientExist -> ClientEntityMapper.toClient(clientExist));
+        if(clientSearch.isPresent()){
             throw new BussinessException("The Client width identification "+client.getIdentification()+" already exist in Database!!!");
         }
         if(client.getIdentification().isEmpty()){
@@ -53,14 +54,10 @@ public class ClientServiceImpl implements ClientService {
         }
         return clientToSave;
     }
-    public Optional<Client> updateClient(Long id, Client client) {
-        Optional<Client> clientToUpdate = clientRepository.findById(id).map(clientExist -> ClientEntityMapper.toClient(clientExist));
+    public Optional<Client> updateClient(String identification, Client client) {
+        Optional<Client> clientToUpdate = clientRepository.findByIdentification(client.getIdentification()).map(clientExist -> ClientEntityMapper.toClient(clientExist));
         if(clientToUpdate.isEmpty()){
-            throw new ResourceNotFoundException("client", "id", id);
-        }
-        Optional<Client> clientByIdentificationToUpdate = clientRepository.findByIdentification(client.getIdentification()).map(clientExist -> ClientEntityMapper.toClient(clientExist));
-        if(clientByIdentificationToUpdate.isPresent() && !id.equals(clientByIdentificationToUpdate.get().getId())){
-            throw new BussinessException("The Client with Identification "+client.getIdentification()+" already exists in Database with another ID");
+            throw new ResourceNotFoundException("client", "identification", identification);
         }
         Optional<Client> clientUpdated = Optional.of(clientRepository.save(ClientEntityMapper.toClientEntity(client))).map(clientSave -> ClientEntityMapper.toClient(clientSave));
         if(clientUpdated.isEmpty()){
@@ -68,16 +65,16 @@ public class ClientServiceImpl implements ClientService {
         }
         return clientUpdated;
     }
-    public Optional<Client> deleteClient(Long id) {
-        Optional<Client> clientToDelete = clientRepository.findById(id).map(client -> ClientEntityMapper.toClient(client));
+    public Optional<Client> deleteClientByIdentification(String identification) {
+        Optional<Client> clientToDelete = clientRepository.findByIdentification(identification).map(clientExist -> ClientEntityMapper.toClient(clientExist));
         if(clientToDelete.isEmpty()){
-            throw new ResourceNotFoundException("client", "id", id);
+            throw new ResourceNotFoundException("client", "identification", identification);
         }
         try{
-            clientRepository.deleteById(id);
+            clientRepository.deleteByIdentification(identification);
             return clientToDelete;
         }catch(DataAccessException e){
-            throw new BussinessException("Problem to Delete Client in Database");
+            throw new BussinessException("Problem to Delete Client in Database"+e.getMessage());
         }
 
 

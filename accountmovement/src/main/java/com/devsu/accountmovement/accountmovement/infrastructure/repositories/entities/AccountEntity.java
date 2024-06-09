@@ -23,7 +23,7 @@ public class AccountEntity {
     private Long id;
     private String accountNumber;
     private String accountType;
-    private Long initialBalance;
+    private Long accountBalance;
     private boolean status;
     private Long idClient;
     private String identification;
