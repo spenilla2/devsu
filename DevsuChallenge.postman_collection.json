@@ -1,0 +1,316 @@
+{
+	"info": {
+		"_postman_id": "7b5fe6d7-5224-41c9-a909-9feafa012559",
+		"name": "Devsu Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "10065215",
+		"_collection_link": "https://interstellar-astronaut-6825.postman.co/workspace/My-Workspace~efcbeeb8-2342-4aae-81cd-04fb8b80f6f2/collection/10065215-7b5fe6d7-5224-41c9-a909-9feafa012559?action=share&source=collection_link&creator=10065215"
+	},
+	"item": [
+		{
+			"name": "Clients",
+			"item": [
+				{
+					"name": "Create Client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Juan Osorio\",\r\n  \"gender\": \"Femenino\",\r\n  \"age\": 30,\r\n  \"identification\": \"12345678\",\r\n  \"address\": \"13 junio y Equinoccial\",\r\n  \"phone\": \"098874587\",\r\n  \"clientId\": \"juan.osorio\",\r\n  \"password\": \"1245\",\r\n  \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4001/api/client"
+					},
+					"response": []
+				},
+				{
+					"name": "List Clients",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4001/api/client/clients"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Client By Identification",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4001/api/client/123456"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Client",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Leon Santiago Penilla\",\r\n  \"gender\": \"Masculino\",\r\n  \"age\": 39,\r\n  \"identification\": \"123456789\",\r\n  \"address\": \"Calle 12B # 59 - 31\",\r\n  \"phone\": \"3053578491\",\r\n  \"clientId\": \"leon.penilla\",\r\n  \"password\": \"146801\",\r\n  \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4001/api/client/123456"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by Identification",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:4001/api/client/123456"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Account",
+			"item": [
+				{
+					"name": "Create Account",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountNumber\": \"585545\",\r\n  \"accountType\": \"Corriente\",\r\n  \"accountBalance\": 1000,\r\n  \"status\": true,\r\n  \"identification\":\"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4002/api/account"
+					},
+					"response": []
+				},
+				{
+					"name": "List Accounts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4002/api/account/accounts"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Account By Account Number",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4002/api/account/478758"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Account",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"accountNumber\": \"478758\",\r\n  \"accountType\": \"Ahorros\",\r\n  \"accountBalance\": 2000,\r\n  \"identification\":\"123456\",\r\n  \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4002/api/account/478758"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by AccountNumber",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:4002/api/account/478758"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Movement",
+			"item": [
+				{
+					"name": "Create Movement",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"accountNumber\": \"496825\",\r\n  \"movementDetail\":-540,  \r\n  \"dateMovement\":\"2022-04-29\",\r\n  \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4002/api/movement"
+					},
+					"response": []
+				},
+				{
+					"name": "List Movements",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4002/api/movement/movements"
+					},
+					"response": []
+				},
+				{
+					"name": "Search Movement By Id",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {}
+						},
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:4002/api/movement/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Movement",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \r\n  \"accountNumber\": \"478758\",\r\n  \"accountType\": \"Ahorros\",\r\n  \"initialBalance\": 2000,\r\n  \"status\": true,\r\n  \"movementDetail\":2000,\r\n  \"finalBalance\":4000,\r\n  \"dateMovement\":\"12/04/2024\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:4002/api/movement/1"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete by Id",
+					"request": {
+						"auth": {
+							"type": "apikey",
+							"apikey": {}
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": "http://localhost:4002/api/movement/11"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Reports",
+			"item": [
+				{
+					"name": "Reports",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:4002/api/reports?start=2019-01-01&end=2024-12-31&identification=1234567",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "4002",
+							"path": [
+								"api",
+								"reports"
+							],
+							"query": [
+								{
+									"key": "start",
+									"value": "2019-01-01"
+								},
+								{
+									"key": "end",
+									"value": "2024-12-31"
+								},
+								{
+									"key": "identification",
+									"value": "1234567"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health API ClientPerson",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": {}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:4001/actuator"
+			},
+			"response": []
+		},
+		{
+			"name": "Health API AccountMovement",
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": {}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:4002/actuator"
+			},
+			"response": []
+		}
+	]
+}

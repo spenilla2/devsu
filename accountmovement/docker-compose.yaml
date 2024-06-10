@@ -1,0 +1,41 @@
+version: '3.8'
+services:
+  mysql:
+    container_name: mysqlDataBase
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: challengepassword
+      MYSQL_DATABASE: devsu_challenge
+      MYSQL_USER: devsu_user
+      MYSQL_PASSWORD: challengepassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - devsu_challenge_network  
+
+  accountmovement:
+    container_name: apiAccountMovement
+    build:
+      context: ./accountmovement
+      dockerfile: Dockerfile
+    ports:
+      - "4002:4002"
+    depends_on:
+      - mysql
+      - clientperson
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devsu_challenge
+      CLIENT_API_URL: http://apiClientPerson  //Esta es la Url del servicio de clientperson el cual se encuentra en el puerto 4001 se debe de cambiar a (localhost si el servicio clientperson no esta en el mismo proyecto del contenedor de accountmovement) o apiClientPerson(si esta en el mismo proyecto)
+      CLIENT_API_PORT: 4001
+    networks:
+      - devsu_challenge_network
+
+volumes:
+  mysql_data:
+
+networks:
+  devsu_challenge_network:
+    driver: bridge
