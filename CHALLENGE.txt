@@ -1,0 +1,156 @@
+Prueba Técnica/Práctica
+
+Arquitectura Microservicio
+
+Indicaciones generales
+
+- Aplique todas las buenas prácticas de programación, y patrones de diseño (ejemplo: Repository), etc. que considere necesario. ( Esto se tendrá en cuenta este punto para la calificación).
+- El microservicio debe de estar bajo el manager JPA / Entity Framework Core.
+- Se debe aplicar un manejo de excepciones.
+- El código será como mínimo una prueba unitaria.
+- El microservicio debe de poder correr en Docker.
+- Resolver el problema en el lenguaje de su preferencia.
+- Se debe de poder ejecutar el código en un entorno local.
+
+Herramientas y tecnologías utilizadas
+
+- Para el desarrollo del microservicio, utilizar Java spring boot. Si se prefiere un posible con .NET, utilizar NetCore 5 o superior / Asp 4.8 o inferior
+- IDE de su preferencia
+- Base de Datos Relacional
+- Postman v9.13.2 (validación de API) / Karate DSL
+
+Requerimiento de Microservicios y Funcionalidades
+
+Se agrupan en 2 microservicios, agrupando (Cliente, Persona) y (Cuenta, Movimientos) 
+Cumplir las funcionalidades de los microservicios, se debe de implementar las siguientes funcionalidades: F1, F2, F3, F4, F5, F6. Se debe de basarse la funcionalidad F6.
+
+*Consideraciones Adicionales (para obtener la máxima puntuación):
+
+Si quieres sobresalir, además de cumplir con los requisitos mencionados anteriormente, se espera la implementación de las funcionalidades F6 y F7.
+
+La solución debe contemplar (no necesariamente implementando) factores como: rendimiento, escalabilidad, resiliencia, etc.
+
+Generación de Api Rest “Application Programming Interface”
+
+Manejar los verbos: Get, Post, Put, Patch, Delete
+
+Persona
+
+- Implementar la clase persona con los siguientes atributos: nombre, género, edad, identificacion, direccion, telefono
+- Debe manejar su clave primaria (PK)
+
+Cliente
+
+- El cliente debe manejar una entidad, que herede de la clase persona.
+- Un cliente tiene: clienteid, contraseña, estado.
+- El cliente debe tener una clave unica(PK)
+
+Cuenta
+
+- La cuenta debe manejar una entidad.
+- Cada cuenta tiene: número de cuenta, tipo de cuenta, saldo Inicial, estado.
+- Debe manejar su clave unica 
+
+Movimientos
+
+- Movimientos debe manejar una entidad.
+- Un movimiento tiene: Fecha, tipo movimiento, valor, saldo.
+- Debe manejar su clave única.
+
+Funcionalidades del API
+
+Los API’s deben tener las siguientes operaciones:
+
+F1: Generación de CRUDS (Crear, editar, actualizar y eliminar registros - Entidades: Cliente, Cuenta y Movimiento).
+
+Los nombres de los endpoints a generar son:
+- /clientes
+- /cuentas
+- /movimientos
+
+F2: Registro de movimientos: al registrar un movimiento en la cuenta se debe tener en cuenta lo siguiente:
+- Para un movimiento se pueden tener valores positivos y negativos.
+- Al realizar un movimiento se debe actualizar el saldo disponible
+- Se debe llevar el registro de las transacciones realizadas.
+
+F3: Registro de Movimientos: Al realizar un movimiento el cual no cuente con saldo, debe alertar mediante el siguiente mensaje “Saldo no disponible”
+- Defina, según su criterio, la mejor manera de capturar y mostrar el error.
+
+F4: Reportes: Generar un reporte de “Estado de cuenta” especificando un rango de fechas y cliente.
+- Este reporte debe contener:
+  o Cuentas asociadas con los respectivos saldos
+  o Detalle de Movimientos de las cuentas
+    - El Endpoint a utilizar para esto debe ser el siguiente:
+      o (/reportes?fecha=rango fechas & cliente)
+  - El servicio del reporte debe retornar la información en formato JSON
+  - Defina, según su expertise, la mejor manera de solicitar y retornar esta información.
+
+F5: Pruebas unitarias: Implementar 1 prueba unitaria para la entidad de dominio Cliente.
+
+F6: Pruebas de Integración: Implementar 1 prueba de integración.
+
+F7: Despliegue en la solución en contenedores.
+
+Casos de Uso (Ejemplos)
+
+1. Creación de Usuarios.
+
+Nombres                Dirección                        Teléfono            Contraseña estado
+Jose Lema              Otavalo sn y principal           098254785           1234       True
+Marianela Montalvo     Amazonas y NNNU                  097549856           5678       True
+Juan Osorio            13 junio y Equinoccial           098874587           1245       True
+
+2. Creación de Cuentas de Usuario.
+
+Numero Cuenta       Tipo         Saldo Inicial   Estado   Cliente
+478758              Ahorros      2000            True     Jose Lema
+225487              Ahorros      100             True     Marianela Montalvo
+495878              Ahorros      0               True     Juan Osorio
+496825              Ahorros      540             True     Marianela Montalvo
+
+3. Crear una nueva Cuenta Corriente para Jose Lema
+
+Numero Cuenta       Tipo         Saldo Inicial   Estado   Cliente
+585545              Corriente    1000            True     Jose Lema
+
+4. Realizar los siguientes movimientos
+
+Aquí están los movimientos solicitados para cada cuenta:
+Cuenta         Tipo       Saldo Inicial       Estado       Movimiento           Saldo Final
+478758         Ahorros    2000                True         Retiro de 575        1425
+225487         Corriente  100                 True         Depósito de 600      700
+495878         Ahorros    0                   True         Depósito de 150      150
+496825         Ahorros    540                 True         Retiro de 540        0
+
+5. Listado de Movimiento, por fechas x usuario.
+
+Fecha        Cliente              Numero Cuenta    Tipo       Saldo Inicial     Estado   Movimiento  Saldo Disponible
+                                                                                             
+10/2/2022    Marianela Montalvo   225487           Corriente  100               True     600         700                
+8/2/2022     Marianela Montalvo   496825           Ahorros    540               True     -540        0
+                
+
+Ejemplo Json:
+json
+{
+  "Fecha": "10/2/2022",
+  "Cliente": "Marianela Montalvo",
+  "Numero Cuenta": "225487",
+  "Tipo": "Corriente",
+  "Saldo Inicial": 100,
+  "Estado": true,
+  "Movimiento": 600,
+  "Saldo Disponible": 700
+}
+
+
+Instrucciones de despliegue / Entregables:
+- Generar el script de base datos, entidades y esquema datos, con el nombre BaseDatos.sql.
+- Incluir archivo Json, de Aplicación Postman, para validación de los endpoints. (http://{servidor}:{puerto}/api/{metodo}...{Parámetros})
+- En el caso de usar Karate (Si aplicaste para una posición con Java): Iniciar el set de pruebas en el proyecto JAVA, garantizando que los 10/12 escenarios automáticos pasen.
+- Crear un repositorio público en Github con todos los archivos generados y colocar la URL al repositorio en los comentarios de este ejercicio.
+- Adicional, Subir un .zip o .rar con todos los archivos generados.
+
+¡Muchos éxitos en su prueba!
+
+

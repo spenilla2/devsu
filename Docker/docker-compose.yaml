@@ -1,0 +1,55 @@
+version: '3.8'
+services:
+  mysql:
+    container_name: mysqlDataBase
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: challengepassword
+      MYSQL_DATABASE: devsu_challenge
+      MYSQL_USER: devsu_user
+      MYSQL_PASSWORD: challengepassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - devsu_challenge_network  
+
+  clientperson:
+    container_name: apiClientPerson
+    build:
+      context: ./clientperson
+      dockerfile: Dockerfile
+    ports:
+      - "4001:4001"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devsu_challenge
+    networks:
+      - devsu_challenge_network
+
+  accountmovement:
+    container_name: apiAccountMovement
+    build:
+      context: ./accountmovement
+      dockerfile: Dockerfile
+    ports:
+      - "4002:4002"
+    depends_on:
+      - mysql
+      - clientperson
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/devsu_challenge
+      CLIENT_API_URL: http://apiClientPerson
+      CLIENT_API_PORT: 4001
+    networks:
+      - devsu_challenge_network
+
+volumes:
+  mysql_data:
+
+networks:
+  devsu_challenge_network:
+    driver: bridge

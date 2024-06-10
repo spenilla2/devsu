@@ -1,0 +1,21 @@
+{"properties": [{
+  "name": "account.api.port",
+  "type": "java.lang.String",
+  "description": "A description for 'account.api.port'"
+},
+{
+  "name": "account.api.url",
+  "type": "java.lang.String",
+  "description": "A description for 'account.api.url'"
+},
+{
+        "name": "client.api.port",
+        "type": "java.lang.String",
+        "description": "A description for 'client.api.port'"
+},
+{
+        "name": "client.api.url",
+        "type": "java.lang.String",
+        "description": "A description for 'client.api.url'"
+}
+]}
