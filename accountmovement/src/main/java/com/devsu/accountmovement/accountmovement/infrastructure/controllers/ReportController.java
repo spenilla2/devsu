@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors; 
 @RestController
 @RequestMapping("/api/reports")
 public class ReportController {
@@ -26,21 +26,26 @@ public class ReportController {
     @GetMapping
     public ResponseEntity<List<ReportDTO>> getMethodName(@RequestParam LocalDate start, @RequestParam LocalDate end, @RequestParam String identification) {        
         List<Map<String, Object>> results = movementRepository.getReports(start, end, identification);
-        List<ReportDTO> reports = new ArrayList<>();
-        int index=0;        
-        for (Map<String, Object> row : results) {
-            index++;
-            LocalDate date = ((Date) row.get("date")).toLocalDate();
-            String clientName = (String) row.get("clientName");
-            String accountNumber = (String) row.get("accountNumber");
-            String accountType = (String) row.get("accountType");
-            Long initialBalance = (Long) row.get("initialBalance");
-            boolean state = (boolean) row.get("state");
-            Long movementDetail = (Long) row.get("movementDetail");
-            Long finalBalance = (Long) row.get("finalBalance");            
-            ReportDTO report = new ReportDTO(index,date, clientName, accountNumber, accountType, initialBalance, state, movementDetail, finalBalance);
-            reports.add(report);
-        }        
+        List<ReportDTO> reports = mapResultsToReportDTOs(results);
         return ResponseEntity.ok(reports);
+    }
+    private List<ReportDTO> mapResultsToReportDTOs(List<Map<String, Object>> results) {
+        AtomicInteger index = new AtomicInteger(0);
+        return results.stream()
+                .map(row -> mapRowToReportDTO(row, index.incrementAndGet()))
+                .collect(Collectors.toList());
+    }
+    private ReportDTO mapRowToReportDTO(Map<String, Object> row, int index) {
+        ReportDTO reportDTO = new ReportDTO();
+        reportDTO.setIndex(index);
+        reportDTO.setDate(((Date) row.get("date")).toLocalDate());
+        reportDTO.setClientName((String) row.get("clientName"));
+        reportDTO.setAccountNumber((String) row.get("accountNumber"));
+        reportDTO.setAccountType((String) row.get("accountType"));
+        reportDTO.setInitialBalance((Long) row.get("initialBalance"));
+        reportDTO.setState((boolean) row.get("state"));
+        reportDTO.setMovementDetail((Long) row.get("movementDetail"));
+        reportDTO.setFinalBalance((Long) row.get("finalBalance"));
+        return reportDTO;
     }
 }

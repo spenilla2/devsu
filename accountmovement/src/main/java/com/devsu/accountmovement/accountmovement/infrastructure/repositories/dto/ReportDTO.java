@@ -15,20 +15,5 @@ public class ReportDTO {
     private boolean state;
     private Long movementDetail;
     private Long finalBalance;
-
-    public ReportDTO() {
-    }
-    public ReportDTO(int index, LocalDate date, String clientName, String accountNumber, String accountType, Long initialBalance,
-            boolean state, Long movementDetail, Long finalBalance) {
-        this.index = index; 
-        this.date = date;
-        this.clientName = clientName;
-        this.accountNumber = accountNumber;
-        this.accountType = accountType;
-        this.initialBalance = initialBalance;
-        this.state = state;
-        this.movementDetail = movementDetail;
-        this.finalBalance = finalBalance;
-    }
     
 }
